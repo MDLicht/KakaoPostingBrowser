@@ -1,0 +1,26 @@
+<resources>
+    <string-array name="order_array">
+        <item>@string/common_title</item>
+        <item>@string/common_date_time</item>
+    </string-array>
+    <string-array name="filter_array">
+        <item>@string/filter_all</item>
+        <item>@string/filter_blog</item>
+        <item>@string/filter_cafe</item>
+    </string-array>
+    <string name="app_name">KakaoPostingBrowser</string>
+    <string name="hint_keyword">Input Keyword</string>
+    <string name="common_search">검색</string>
+    <string name="common_order">정렬</string>
+    <string name="common_title">Title</string>
+    <string name="common_date_time">Date</string>
+    <string name="common_move">이동</string>
+    <string name="common_cancel">취소</string>
+    <string name="common_confirm">적용</string>
+    <string name="filter_all">All</string>
+    <string name="filter_blog">Blog</string>
+    <string name="filter_cafe">Cafe</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

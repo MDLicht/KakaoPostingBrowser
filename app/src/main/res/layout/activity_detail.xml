@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+>
+    <data>
+        <variable name="name" type="String"/>
+        <variable name="document" type="com.mdlicht.zb.kakaopostingbrowser.model.Document"/>
+        <import type="android.text.TextUtils"/>
+        <import type="com.mdlicht.zb.kakaopostingbrowser.util.TimeUtil"/>
+        <variable name="activity" type="com.mdlicht.zb.kakaopostingbrowser.activity.DetailActivity"/>
+    </data>
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".activity.DetailActivity"
+            android:background="@android:color/white">
+
+        <include
+                layout="@layout/toolbar_detail"
+                android:id="@+id/toolbarWrapper"/>
+        <android.support.v4.widget.NestedScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp" android:fillViewport="true"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarWrapper" app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    <ImageView
+                            app:imageUrl="@{document.thumbnail}"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:id="@+id/ivThumbnail" app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="16dp" android:layout_marginRight="16dp"
+                            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp" android:layout_marginTop="24dp"
+                            app:layout_constraintTop_toTopOf="parent" app:layout_constraintDimensionRatio="1:1"/>
+                    <TextView
+                            android:text="@{TextUtils.isEmpty(document.blogname) ? document.cafename : document.blogname}"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="12sp"
+                            android:id="@+id/tvLabel" app:layout_constraintEnd_toEndOf="parent"
+                            android:layout_marginEnd="16dp" android:layout_marginRight="16dp"
+                            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="16dp"
+                            android:layout_marginStart="16dp" android:layout_marginTop="24dp"
+                            app:layout_constraintTop_toBottomOf="@+id/ivThumbnail"/>
+                    <TextView
+                            app:fromHtml="@{document.title}"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvTitle"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/tvLabel"
+                            app:layout_constraintEnd_toEndOf="@+id/tvLabel"
+                            app:layout_constraintStart_toStartOf="@+id/tvLabel"/>
+                    <TextView
+                            app:fromHtml="@{document.contents}"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvContents"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/black"
+                            android:textStyle="bold"
+                            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                            app:layout_constraintEnd_toEndOf="@+id/tvLabel"
+                            app:layout_constraintStart_toStartOf="@+id/tvLabel"/>
+                    <TextView
+                            app:dateTimeForDetail="@{document.datetime}"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tvDateTime"
+                            android:textSize="10sp"
+                            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/tvContents"
+                            app:layout_constraintEnd_toEndOf="@+id/tvLabel"
+                            app:layout_constraintStart_toStartOf="@+id/tvLabel"/>
+                    <Button
+                            android:onClick="@{view -> activity.onMoveClick(document)}"
+                            android:text="@string/common_move"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/btnGoToUrl" app:layout_constraintEnd_toEndOf="@+id/tvLabel"
+                            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/tvDateTime"/>
+                    <TextView
+                            android:text="@{document.url}"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/black"
+                            android:id="@+id/tvUrl" app:layout_constraintStart_toStartOf="@+id/tvLabel"
+                            app:layout_constraintEnd_toStartOf="@+id/btnGoToUrl" android:layout_marginEnd="8dp"
+                            android:layout_marginRight="8dp"
+                            app:layout_constraintTop_toTopOf="@+id/btnGoToUrl"
+                            app:layout_constraintBottom_toBottomOf="@+id/btnGoToUrl"/>
+                </android.support.constraint.ConstraintLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
