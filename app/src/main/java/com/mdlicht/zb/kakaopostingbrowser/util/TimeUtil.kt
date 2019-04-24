@@ -90,20 +90,19 @@ object TimeUtil {
         return now.after(calendar) // calendar(dday) 가 now 보다 이전(true)인지 아닌지(false)
     }
 
-    //Todo : 날짜
-    fun getDateDiff(date: String, format: String): Int {
-        val today = Calendar.getInstance()
+    fun getDateDiff(date: String, fromFormat: String, toFormat: String): Int {
+        val today = Calendar.getInstance(Locale.KOREA)
         today.apply {
             clear()
             timeInMillis = System.currentTimeMillis()
         }
+        val tf = SimpleDateFormat(toFormat, Locale.KOREA)
+        val tDate = tf.parse(tf.format(today.time))
 
-        val f = SimpleDateFormat(format, Locale.KOREA)
-        val calendar = Calendar.getInstance()
-        calendar.clear()
-        calendar.time = f.parse(date)
+        val ff = SimpleDateFormat(toFormat, Locale.KOREA)
+        val fDate = ff.parse(convertDateFormat(date, fromFormat, toFormat))
 
-        val diff = today.timeInMillis - calendar.timeInMillis
+        val diff = tDate.time - fDate.time
         return (diff / ONE_DAY_MILLISECONDS).toInt()
     }
 }

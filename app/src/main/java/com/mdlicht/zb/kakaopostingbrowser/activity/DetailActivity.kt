@@ -23,7 +23,7 @@ class DetailActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail)
         binding.apply {
             val documentData: Document = intent.getParcelableExtra(Constants.KEY_DOCUMENT)
-            val nameValue = if(TextUtils.isEmpty(documentData.blogname)) "Cafe" else "Blog"
+            val nameValue = if(TextUtils.isEmpty(documentData.blogname)) getString(R.string.filter_cafe) else getString(R.string.filter_blog)
             name = nameValue
             toolbarWrapper.vm = ViewModelProviders.of(this@DetailActivity, ToolbarViewModelFactory(nameValue))[ToolbarViewModel::class.java]
             toolbarWrapper.vm.apply {

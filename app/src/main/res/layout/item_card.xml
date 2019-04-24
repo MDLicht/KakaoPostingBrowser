@@ -13,7 +13,7 @@
             android:background="@android:color/white">
 
         <TextView
-                android:text="@{TextUtils.isEmpty(document.blogname) ? `Cafe` : `Blog`}"
+                android:text="@{TextUtils.isEmpty(document.blogname) ? @string/filter_cafe : @string/filter_blog}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="10sp"

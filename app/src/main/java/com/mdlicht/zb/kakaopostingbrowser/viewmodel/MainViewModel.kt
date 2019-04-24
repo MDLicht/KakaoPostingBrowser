@@ -16,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 class MainViewModel : BaseViewModel() {
     val keyword: ObservableField<String> = ObservableField()
     val order: ObservableInt = ObservableInt(0)
+    val filter: ObservableInt = ObservableInt(0)
     var dataSet: ObservableField<List<Document?>?> = ObservableField()
 
     var clickOrder: MutableLiveData<Boolean> = MutableLiveData()

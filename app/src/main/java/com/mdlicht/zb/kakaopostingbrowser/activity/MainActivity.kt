@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity(), OrderDialog.OnOrderListener {
                 setOnItemClickListener { adapterView, view, i, l ->
                     vm?.onSearchClick(view, adapterView.adapter.getItem(i) as String)
                 }
-                (adapter as ArrayAdapter<String>).clear()
                 threshold = 1
             }
             spCategory.apply {
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity(), OrderDialog.OnOrderListener {
                     }
 
                     override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                        (binding.rvList.adapter as SearchRvAdapter).filter = p2
+                        vm?.filter?.set(p2)
                     }
                 }
             }
@@ -79,7 +78,6 @@ class MainActivity : AppCompatActivity(), OrderDialog.OnOrderListener {
 
     override fun onConfirmClick(dialogFragment: DialogFragment, order: Int) {
         binding.vm!!.order.set(order)
-        (binding.rvList.adapter as SearchRvAdapter).order = order
         dialogFragment.dismissAllowingStateLoss()
     }
 

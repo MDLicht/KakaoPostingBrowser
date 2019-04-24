@@ -21,6 +21,18 @@ object BindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("order")
+    fun setOrder(rv: RecyclerView, order: Int = 0) {
+        (rv.adapter as SearchRvAdapter).order = order
+    }
+
+    @JvmStatic
+    @BindingAdapter("filter")
+    fun setFilter(rv: RecyclerView, filter: Int = 0) {
+        (rv.adapter as SearchRvAdapter).filter = filter
+    }
+
+    @JvmStatic
     @BindingAdapter("imageUrl")
     fun setImageUrl(view: ImageView, url: String) {
         Glide.with(view)
@@ -37,7 +49,7 @@ object BindingAdapter {
         var converted: String? = null
 
         dateTime?.let {
-            val diff = TimeUtil.getDateDiff(it, TimeUtil.YYYY_MM_DD_HH_mm_ss)
+            val diff = TimeUtil.getDateDiff(it, TimeUtil.YYYY_MM_DD_HH_mm_ss, TimeUtil.YYYY_MM_DD)
             converted = when (diff) {
                 0 -> "오늘"
                 1 -> "어제"

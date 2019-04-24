@@ -1,5 +1,6 @@
 package com.mdlicht.zb.kakaopostingbrowser.activity
 
+import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
@@ -17,12 +18,13 @@ import com.mdlicht.zb.kakaopostingbrowser.viewmodel.factory.ToolbarViewModelFact
 class WebViewActivity : AppCompatActivity() {
     lateinit var binding: ActivityWebViewBinding
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_web_view)
         binding.apply {
             val documentData = intent.getParcelableExtra<Document>(Constants.KEY_DOCUMENT)
-            val nameValue = if(TextUtils.isEmpty(documentData.blogname)) "Cafe" else "Blog"
+            val nameValue = if(TextUtils.isEmpty(documentData.blogname))  getString(R.string.filter_cafe) else getString(R.string.filter_blog)
             document = documentData
             toolbarWrapper.vm = ViewModelProviders.of(this@WebViewActivity, ToolbarViewModelFactory(nameValue))[ToolbarViewModel::class.java]
             toolbarWrapper.vm.apply {

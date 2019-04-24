@@ -35,18 +35,7 @@ class SearchRvAdapter: RecyclerView.Adapter<SearchViewHolder>() {
     }
 
     override fun onBindViewHolder(p0: SearchViewHolder, p1: Int) {
-        val item = dataSet?.get(p1)
-        p0.binding.document = item
-        p0.binding.root.setOnClickListener {
-            it.context.startActivity(Intent(it.context, DetailActivity::class.java).apply {
-                putExtra(Constants.KEY_DOCUMENT, item)
-            })
-        }
-        if(PreferenceUtil.isVisited(p0.binding.root.context, item!!.url!!)) {
-            p0.binding.root.setBackgroundColor(Color.LTGRAY)
-        } else {
-            p0.binding.root.setBackgroundColor(Color.WHITE)
-        }
+        p0.onBind(p1, dataSet?.get(p1))
     }
 
     private fun filterChanged() {
