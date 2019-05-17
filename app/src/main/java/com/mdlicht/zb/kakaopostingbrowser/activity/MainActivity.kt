@@ -8,12 +8,15 @@ import android.support.v4.app.DialogFragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.text.TextUtils
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.mdlicht.zb.kakaopostingbrowser.R
 import com.mdlicht.zb.kakaopostingbrowser.adapter.SearchRvAdapter
 import com.mdlicht.zb.kakaopostingbrowser.common.EndlessRecyclerViewScrollListener
+import com.mdlicht.zb.kakaopostingbrowser.common.showToast
 import com.mdlicht.zb.kakaopostingbrowser.databinding.ActivityMainBinding
 import com.mdlicht.zb.kakaopostingbrowser.dialog.OrderDialog
 import com.mdlicht.zb.kakaopostingbrowser.util.PreferenceUtil
@@ -33,10 +36,14 @@ class MainActivity : AppCompatActivity(), OrderDialog.OnOrderListener {
                     OrderDialog.newInstance().show(supportFragmentManager, null)
                 })
                 this.clickSearch.observe(this@MainActivity, Observer {
-                    (etKeyword.adapter as ArrayAdapter<String>).apply {
-                        if(getPosition(it) < 0) {
-                            add(it)
-                            notifyDataSetChanged()
+                    if (TextUtils.isEmpty(it)) {
+                        showToast(getString(R.string.msg_empty_keyword_guide))
+                    } else {
+                        (etKeyword.adapter as ArrayAdapter<String>).apply {
+                            if (getPosition(it) < 0) {
+                                add(it)
+                                notifyDataSetChanged()
+                            }
                         }
                     }
                 })
@@ -51,14 +58,26 @@ class MainActivity : AppCompatActivity(), OrderDialog.OnOrderListener {
                 })
             }
             etKeyword.apply {
-                setAdapter(ArrayAdapter<String>(this@MainActivity, android.R.layout.simple_dropdown_item_1line, PreferenceUtil.getSearchHistory(this@MainActivity).toList()))
+                setAdapter(
+                    ArrayAdapter<String>(
+                        this@MainActivity,
+                        android.R.layout.simple_dropdown_item_1line,
+                        PreferenceUtil.getSearchHistory(this@MainActivity).toList()
+                    )
+                )
+                setOnEditorActionListener { view, id, _ ->
+                    if(id == EditorInfo.IME_ACTION_SEARCH) {
+                        vm?.onSearchClick(view, view.text.toString())
+                    }
+                    true
+                }
                 setOnItemClickListener { adapterView, view, i, l ->
                     vm?.onSearchClick(view, adapterView.adapter.getItem(i) as String)
                 }
                 threshold = 1
             }
             spCategory.apply {
-                onItemSelectedListener = object:AdapterView.OnItemSelectedListener {
+                onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                     override fun onNothingSelected(p0: AdapterView<*>?) {
 
                     }

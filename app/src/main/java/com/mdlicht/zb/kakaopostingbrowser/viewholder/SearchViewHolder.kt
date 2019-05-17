@@ -31,7 +31,7 @@ class SearchViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             })
         }
         if(PreferenceUtil.isVisited(binding.root.context, item!!.url!!)) {
-            binding.root.setBackgroundColor(Color.LTGRAY)
+            binding.root.setBackgroundColor(itemView.context.resources.getColor(R.color.color_visited))
         } else {
             binding.root.setBackgroundColor(Color.WHITE)
         }

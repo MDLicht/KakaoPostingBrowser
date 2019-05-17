@@ -8,6 +8,8 @@
         <item>@string/filter_blog</item>
         <item>@string/filter_cafe</item>
     </string-array>
+    <string name="common_today">오늘</string>
+    <string name="common_yesterday">어제</string>
     <string name="app_name">KakaoPostingBrowser</string>
     <string name="hint_keyword">Input Keyword</string>
     <string name="common_search">검색</string>
@@ -20,6 +22,9 @@
     <string name="filter_all">All</string>
     <string name="filter_blog">Blog</string>
     <string name="filter_cafe">Cafe</string>
+
+    <string name="msg_empty_guide">검색 결과가 없습니다.</string>
+    <string name="msg_empty_keyword_guide">검색어를 입력해주세요.</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

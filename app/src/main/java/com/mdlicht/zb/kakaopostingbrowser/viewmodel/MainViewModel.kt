@@ -3,6 +3,7 @@ package com.mdlicht.zb.kakaopostingbrowser.viewmodel
 import android.arch.lifecycle.MutableLiveData
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
+import android.text.TextUtils
 import android.view.View
 import com.mdlicht.zb.kakaopostingbrowser.api.RetrofitUtil
 import com.mdlicht.zb.kakaopostingbrowser.model.Document
@@ -22,11 +23,14 @@ class MainViewModel : BaseViewModel() {
     var clickOrder: MutableLiveData<Boolean> = MutableLiveData()
     var clickSearch: MutableLiveData<String> = MutableLiveData()
 
-    fun onSearchClick(view: View, keyword: String) {
-        clickSearch.value = keyword
-        dataSet.set(null)
-        PreferenceUtil.addSearchHistory(view.context, keyword)
-        load(keyword, 1)
+    fun onSearchClick(view: View, keyword: String?) {
+        val word = keyword?.trim()
+        clickSearch.value = word
+        if(!TextUtils.isEmpty(word)) {
+            dataSet.set(null)
+            PreferenceUtil.addSearchHistory(view.context, word!!)
+            load(word, 1)
+        }
     }
 
     fun load(keyword: String, page: Int, size: Int = 25) {

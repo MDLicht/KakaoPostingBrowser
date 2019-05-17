@@ -3,6 +3,7 @@ package com.mdlicht.zb.kakaopostingbrowser.common
 import android.databinding.BindingAdapter
 import android.support.v7.widget.RecyclerView
 import android.text.Html
+import android.view.View
 import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
@@ -18,6 +19,12 @@ object BindingAdapter {
     @BindingAdapter("searchDataSet")
     fun setSearchDataSet(rv: RecyclerView, dataSet: List<Document?>?) {
         (rv.adapter as SearchRvAdapter).setSearchDataSet(dataSet)
+    }
+
+    @JvmStatic
+    @BindingAdapter("emptyGuide")
+    fun setEmptyGuideVisibility(tv: TextView, dataSet: List<Document?>?) {
+        tv.visibility = if(dataSet == null || dataSet.isEmpty()) View.VISIBLE else View.GONE
     }
 
     @JvmStatic
@@ -51,8 +58,8 @@ object BindingAdapter {
         dateTime?.let {
             val diff = TimeUtil.getDateDiff(it, TimeUtil.YYYY_MM_DD_HH_mm_ss, TimeUtil.YYYY_MM_DD)
             converted = when (diff) {
-                0 -> "오늘"
-                1 -> "어제"
+                0 -> tv.context.getString(R.string.common_today)
+                1 -> tv.context.getString(R.string.common_yesterday)
                 else -> TimeUtil.convertDateFormat(it, TimeUtil.YYYY_MM_DD_HH_mm_ss, TimeUtil.YYYY_MM_DD)
             }
         }
