@@ -7,6 +7,12 @@ Searching from kakao blog and cafe
 - Glide
 - Databinding
 
+Options
+1. Filtering : [ All | Blog | Cafe ]
+2. Sorting : [ Title | Date ]
+3. AutoCompleteEditText with Preference
+4. Searching by Button, IME_SEARCH, Click on Autocomplete
+
 <br/>
 
 <div>
