@@ -17,6 +17,8 @@
     <string name="common_title">Title</string>
     <string name="common_date_time">Date</string>
     <string name="common_move">이동</string>
+    <string name="common_move_to_original">원문보기</string>
+    <string name="common_original">출처</string>
     <string name="common_cancel">취소</string>
     <string name="common_confirm">적용</string>
     <string name="filter_all">All</string>
